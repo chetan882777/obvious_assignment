@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.15881458966565348" />
+        <entry key="app/src/main/res/layout/layout_image_list_item.xml" value="0.16032608695652173" />
+        <entry key="app/src/main/res/layout/layout_movie_list_item.xml" value="0.15881458966565348" />
+      </map>
+    </option>
+  </component>
   <component name="ProjectPlainTextFileTypeManager">
     <file url="file://$PROJECT_DIR$/app/src/androidTest/java/com/chetan_pawar/obvious_assignment/ExampleInstrumentedTest.kt" />
   </component>

@@ -42,14 +42,14 @@ class Repository {
                 dataSource.addImage(
                     ImageData(
                         id = i,
-                        copyright = getString("copyright"),
-                        date = getString("date"),
-                        explanation = getString("explanation"),
-                        hdurl = getString("hdurl"),
-                        media_type = getString("media_type"),
-                        service_version = getString("service_version"),
-                        title = getString("title"),
-                        url = getString("url")
+                        copyright = if(has("copyright")) getString("copyright") else null,
+                        date = if(has("date")) getString("date") else null,
+                        explanation = if(has("explanation")) getString("explanation") else null,
+                        hdurl = if(has("hdurl")) getString("hdurl") else null,
+                        media_type = if(has("media_type")) getString("media_type") else null,
+                        service_version = if(has("service_version")) getString("service_version") else null,
+                        title = if(has("title")) getString("title") else null,
+                        url = if(has("url")) getString("url") else null
                     )
                 )
             }
