@@ -15,5 +15,12 @@ class MainActivity : AppCompatActivity() {
 
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
 
+        setObservers()
+    }
+
+    private fun setObservers() {
+        viewModel.images.observe(this, {
+
+        })
     }
 }

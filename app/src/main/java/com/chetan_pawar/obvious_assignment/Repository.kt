@@ -7,13 +7,14 @@ import androidx.lifecycle.MutableLiveData
 import com.chetan_pawar.obvious_assignment.data.DataSource
 import com.chetan_pawar.obvious_assignment.data.ImageData
 import org.json.JSONArray
-import org.json.JSONObject
 import java.io.IOException
 import java.nio.charset.Charset
 
 private const val TAG = "Repository"
 
 class Repository {
+
+    val imagesLiveData : MutableLiveData<DataSource> = MutableLiveData()
 
     fun loadJson(application: Application) {
         var json = ""
@@ -32,13 +33,13 @@ class Repository {
     }
 
     fun loadDataSource(json: String) {
-        val list = ArrayList<ImageData>()
+        val dataSource = DataSource()
 
         val jsonArray = JSONArray(json)
 
         for (i in 0 until jsonArray.length()) {
             jsonArray.getJSONObject(i).run {
-                list.add(
+                dataSource.addImage(
                     ImageData(
                         id = i,
                         copyright = getString("copyright"),
@@ -53,12 +54,11 @@ class Repository {
                 )
             }
         }
-        DataSource.images.value = list
-
+        imagesLiveData.value = dataSource
     }
 
-    fun getAllImages() : LiveData<List<ImageData>> {
-        return DataSource.images
+    fun getAllImages() : LiveData<DataSource> {
+        return imagesLiveData
     }
 
 }

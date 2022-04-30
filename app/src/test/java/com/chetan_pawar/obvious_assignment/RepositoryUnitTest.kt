@@ -9,7 +9,8 @@ import org.junit.Test
 class RepositoryUnitTest {
 
 
-    @get:Rule val rule = InstantTaskExecutorRule()
+    @get:Rule
+    val rule = InstantTaskExecutorRule()
 
     @Test
     fun test_loadDataSource() {
@@ -23,9 +24,11 @@ class RepositoryUnitTest {
                 "        \"title\": \"Starburst Galaxy M94 from Hubble\",\n" +
                 "        \"url\": \"https://apod.nasa.gov/apod/image/1912/M94_Hubble_960.jpg\"\n" +
                 "    }]"
-        Repository().loadDataSource(json = sample)
+        val repo = Repository().also {
+            it.loadDataSource(json = sample)
+        }
 
-        DataSource.images.observeForever{}
+        repo.imagesLiveData.observeForever { }
 
         val imageData = ImageData(
             id = 0,
@@ -39,7 +42,7 @@ class RepositoryUnitTest {
             url = "https://apod.nasa.gov/apod/image/1912/M94_Hubble_960.jpg"
         )
 
-        assert(DataSource.images.value!![0].id == imageData.id)
-
+        assert(repo.imagesLiveData.value!!.getMovie(0)!!.id == imageData.id)
     }
+
 }

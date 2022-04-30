@@ -6,9 +6,11 @@ import com.chetan_pawar.obvious_assignment.Repository
 
 class MainViewModel(application: Application) : AndroidViewModel(application) {
 
-    val repository = Repository()
+    private val repository = Repository()
 
     init {
         repository.loadJson(application)
     }
+
+    val images get() = repository.getAllImages()
 }
