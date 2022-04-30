@@ -1,6 +1,9 @@
 package com.chetan_pawar.obvious_assignment.data
 
+import androidx.lifecycle.MutableLiveData
+
 object DataSource {
-    var images: ArrayList<ImageData> = ArrayList()
+    var images: MutableLiveData<List<ImageData>> = MutableLiveData()
+
 
 }

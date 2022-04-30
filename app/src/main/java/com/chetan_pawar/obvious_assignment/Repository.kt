@@ -2,6 +2,8 @@ package com.chetan_pawar.obvious_assignment
 
 import android.app.Application
 import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.chetan_pawar.obvious_assignment.data.DataSource
 import com.chetan_pawar.obvious_assignment.data.ImageData
 import org.json.JSONArray
@@ -12,7 +14,6 @@ import java.nio.charset.Charset
 private const val TAG = "Repository"
 
 class Repository {
-
 
     fun loadJson(application: Application) {
         var json = ""
@@ -39,6 +40,7 @@ class Repository {
             jsonArray.getJSONObject(i).run {
                 list.add(
                     ImageData(
+                        id = i,
                         copyright = getString("copyright"),
                         date = getString("date"),
                         explanation = getString("explanation"),
@@ -51,6 +53,12 @@ class Repository {
                 )
             }
         }
-        DataSource.images = list
+        DataSource.images.value = list
+
     }
+
+    fun getAllImages() : LiveData<List<ImageData>> {
+        return DataSource.images
+    }
+
 }
