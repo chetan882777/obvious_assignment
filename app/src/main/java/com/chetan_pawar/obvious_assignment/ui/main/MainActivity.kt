@@ -28,6 +28,8 @@ class MainActivity : AppCompatActivity(), ImagesAdapter.Interaction {
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         imageLoader = ProductionImageLoader(this, requestOptions = requestOptions)
 
+        toolbar.title = getString(R.string.app_name)
+
         setObservers()
         initRecyclerView()
     }

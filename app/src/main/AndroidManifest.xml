@@ -10,13 +10,15 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Obvious_assignment" >
+        android:theme="@style/AppTheme.NoActionBar" >
         <activity
             android:name=".ui.detail.DetailActivity"
             android:parentActivityName=".ui.main.MainActivity"
+            android:theme="@style/DetailTheme"
             android:exported="false" />
         <activity
             android:name=".ui.main.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
