@@ -6,6 +6,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.chetan_pawar.obvious_assignment.R
 import com.chetan_pawar.obvious_assignment.data.ImageData
+import com.chetan_pawar.obvious_assignment.util.ImageUtils.requestOptions
 import kotlinx.android.synthetic.main.activity_detail.*
 
 class DetailActivity : AppCompatActivity() {
@@ -28,9 +29,6 @@ class DetailActivity : AppCompatActivity() {
     }
 
     private fun showDetails() {
-        val requestOptions = RequestOptions
-            .placeholderOf(R.drawable.default_image)
-            .error(R.drawable.default_image)
 
         Glide.with(this@DetailActivity)
             .applyDefaultRequestOptions(requestOptions)

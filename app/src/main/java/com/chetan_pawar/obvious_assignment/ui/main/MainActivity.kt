@@ -9,18 +9,28 @@ import com.chetan_pawar.obvious_assignment.R
 import com.chetan_pawar.obvious_assignment.data.ImageData
 import com.chetan_pawar.obvious_assignment.ui.detail.DetailActivity
 import com.chetan_pawar.obvious_assignment.util.GridSpacingItemDecoration
+import com.chetan_pawar.obvious_assignment.util.ImageLoader
+import com.chetan_pawar.obvious_assignment.util.ImageUtils.requestOptions
+import com.chetan_pawar.obvious_assignment.util.ProductionImageLoader
+import com.chetan_pawar.obvious_assignment.util.TestImageLoader
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), ImagesAdapter.Interaction {
 
     private lateinit var listAdapter: ImagesAdapter
     lateinit var viewModel : MainViewModel
+    lateinit var imageLoader : ImageLoader
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+        imageLoader = ProductionImageLoader(this, requestOptions = requestOptions)
+
+        if(intent.hasExtra("value") && intent.getIntExtra("value", 0) == 1) {
+            imageLoader = TestImageLoader()
+        }
 
         setObservers()
         initRecyclerView()
@@ -41,7 +51,7 @@ class MainActivity : AppCompatActivity(), ImagesAdapter.Interaction {
         recycler_view.apply {
             layoutManager = GridLayoutManager(this@MainActivity, 2)
             addItemDecoration(GridSpacingItemDecoration(spanCount, spacing, includeEdge))
-            listAdapter = ImagesAdapter(this@MainActivity)
+            listAdapter = ImagesAdapter(this@MainActivity, imageLoader)
             adapter = listAdapter
         }
     }

@@ -6,12 +6,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.chetan_pawar.obvious_assignment.R
 import com.chetan_pawar.obvious_assignment.data.ImageData
+import com.chetan_pawar.obvious_assignment.util.ImageLoader
 import kotlinx.android.synthetic.main.layout_image_list_item.view.*
 
-class ImagesAdapter(private val interaction: Interaction? = null) :
+class ImagesAdapter(private val interaction: Interaction? = null, private val imageLoader: ImageLoader) :
 RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     val DIFF_CALLBACK = object : DiffUtil.ItemCallback<ImageData>() {
@@ -29,14 +29,14 @@ RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-
         return ImageViewHolder(
             LayoutInflater.from(parent.context).inflate(
                 R.layout.layout_image_list_item,
                 parent,
                 false
             ),
-            interaction
+            interaction,
+            imageLoader
         )
     }
 
@@ -59,7 +59,8 @@ RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     class ImageViewHolder
     constructor(
         itemView: View,
-        private val interaction: Interaction?
+        private val interaction: Interaction?,
+        private val imageLoader: ImageLoader
     ) : RecyclerView.ViewHolder(itemView) {
 
         fun bind(item: ImageData) = with(itemView) {
@@ -67,9 +68,8 @@ RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                 interaction?.onItemSelected(adapterPosition, item)
             }
             image_title.text = item.title
-            Glide.with(itemView)
-                .load(item.url)
-                .into(image_container)
+
+            imageLoader.loadImageUrl(item.url, image_container)
             image_discription.text = item.copyright
 
         }
