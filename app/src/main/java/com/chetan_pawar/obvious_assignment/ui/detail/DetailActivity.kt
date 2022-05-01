@@ -2,20 +2,23 @@ package com.chetan_pawar.obvious_assignment.ui.detail
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 import com.chetan_pawar.obvious_assignment.R
 import com.chetan_pawar.obvious_assignment.data.ImageData
+import com.chetan_pawar.obvious_assignment.util.ImageLoader
 import com.chetan_pawar.obvious_assignment.util.ImageUtils.requestOptions
+import com.chetan_pawar.obvious_assignment.util.ProductionImageLoader
+import com.chetan_pawar.obvious_assignment.util.TestImageLoader
 import kotlinx.android.synthetic.main.activity_detail.*
 
 class DetailActivity : AppCompatActivity() {
 
     companion object {
         const val INTENT_DETAIL_DATA = "INTENT_DETAIL_DATA"
+        const val INTENT_IMAGE_LOADER = "INTENT_IMAGE_LOADER"
     }
 
     private var imageData : ImageData? = null
+    lateinit var imageLoader : ImageLoader
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,17 +26,19 @@ class DetailActivity : AppCompatActivity() {
 
         imageData = intent.getParcelableExtra(INTENT_DETAIL_DATA)
 
+        imageLoader = ProductionImageLoader(this, requestOptions = requestOptions)
+        intent.getParcelableExtra<TestImageLoader>(INTENT_IMAGE_LOADER)?.let {
+            imageLoader = it
+        }
+
+
         if(imageData != null) {
             showDetails()
         } else showError()
     }
 
     private fun showDetails() {
-
-        Glide.with(this@DetailActivity)
-            .applyDefaultRequestOptions(requestOptions)
-            .load(imageData!!.hdurl)
-            .into(image_image)
+        imageLoader.loadImageUrl(imageData!!.hdurl, image_image)
         supportActionBar?.title = imageData!!.title
         image_description.text = imageData!!.explanation
         image_copyright_data.text = imageData!!.copyright

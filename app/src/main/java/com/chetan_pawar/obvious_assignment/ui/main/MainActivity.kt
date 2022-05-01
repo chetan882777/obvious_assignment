@@ -28,10 +28,6 @@ class MainActivity : AppCompatActivity(), ImagesAdapter.Interaction {
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         imageLoader = ProductionImageLoader(this, requestOptions = requestOptions)
 
-        if(intent.hasExtra("value") && intent.getIntExtra("value", 0) == 1) {
-            imageLoader = TestImageLoader()
-        }
-
         setObservers()
         initRecyclerView()
     }
@@ -57,8 +53,9 @@ class MainActivity : AppCompatActivity(), ImagesAdapter.Interaction {
     }
 
     override fun onItemSelected(position: Int, item: ImageData) {
-        val intent = Intent(this@MainActivity, DetailActivity::class.java)
-        intent.putExtra(DetailActivity.INTENT_DETAIL_DATA, item)
+        val intent = Intent(this@MainActivity, DetailActivity::class.java).apply {
+            putExtra(DetailActivity.INTENT_DETAIL_DATA, item)
+        }
         startActivity(intent)
     }
 }
