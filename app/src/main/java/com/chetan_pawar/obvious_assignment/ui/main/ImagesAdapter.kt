@@ -1,5 +1,6 @@
 package com.chetan_pawar.obvious_assignment.ui.main
 
+import android.graphics.drawable.AnimationDrawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -70,6 +71,13 @@ RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             image_title.text = item.title
 
             imageLoader.loadImageUrl(item.url, image_container)
+
+
+            val animationDrawable = image_container.background as AnimationDrawable
+            animationDrawable.setEnterFadeDuration(400)
+            animationDrawable.setExitFadeDuration(400)
+            animationDrawable.start()
+
             image_discription.text = item.copyright
 
         }

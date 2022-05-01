@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.chetan_pawar.obvious_assignment.R
 import com.chetan_pawar.obvious_assignment.data.ImageData
 import com.chetan_pawar.obvious_assignment.util.ImageLoader
-import com.chetan_pawar.obvious_assignment.util.ImageUtils.requestOptions
+import com.chetan_pawar.obvious_assignment.util.ImageUtils.requestOptionsWithPlaceholder
 import com.chetan_pawar.obvious_assignment.util.ProductionImageLoader
 import com.chetan_pawar.obvious_assignment.util.TestImageLoader
 import kotlinx.android.synthetic.main.activity_detail.*
@@ -26,7 +26,7 @@ class DetailActivity : AppCompatActivity() {
 
         imageData = intent.getParcelableExtra(INTENT_DETAIL_DATA)
 
-        imageLoader = ProductionImageLoader(this, requestOptions = requestOptions)
+        imageLoader = ProductionImageLoader(this, requestOptions = requestOptionsWithPlaceholder)
         intent.getParcelableExtra<TestImageLoader>(INTENT_IMAGE_LOADER)?.let {
             imageLoader = it
         }
