@@ -13,6 +13,7 @@
         android:theme="@style/Theme.Obvious_assignment" >
         <activity
             android:name=".ui.detail.DetailActivity"
+            android:parentActivityName=".ui.main.MainActivity"
             android:exported="false" />
         <activity
             android:name=".ui.main.MainActivity"

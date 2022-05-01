@@ -1,11 +1,13 @@
 package com.chetan_pawar.obvious_assignment.ui.main
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.chetan_pawar.obvious_assignment.R
 import com.chetan_pawar.obvious_assignment.data.ImageData
+import com.chetan_pawar.obvious_assignment.ui.detail.DetailActivity
 import com.chetan_pawar.obvious_assignment.util.GridSpacingItemDecoration
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -45,6 +47,8 @@ class MainActivity : AppCompatActivity(), ImagesAdapter.Interaction {
     }
 
     override fun onItemSelected(position: Int, item: ImageData) {
-
+        val intent = Intent(this@MainActivity, DetailActivity::class.java)
+        intent.putExtra(DetailActivity.INTENT_DETAIL_DATA, item)
+        startActivity(intent)
     }
 }

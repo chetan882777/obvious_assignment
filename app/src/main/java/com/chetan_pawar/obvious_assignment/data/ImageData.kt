@@ -1,5 +1,9 @@
 package com.chetan_pawar.obvious_assignment.data
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
 data class ImageData(
     val id: Int,
     val copyright: String?,
@@ -10,4 +14,4 @@ data class ImageData(
     val service_version: String?,
     val title: String?,
     val url: String?,
-)
+) : Parcelable
