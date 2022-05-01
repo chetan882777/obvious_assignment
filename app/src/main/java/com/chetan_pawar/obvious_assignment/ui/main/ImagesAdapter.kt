@@ -66,7 +66,7 @@ RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
         fun bind(item: ImageData) = with(itemView) {
             itemView.setOnClickListener {
-                interaction?.onItemSelected(adapterPosition, item)
+                interaction?.onItemSelected(viewA = image_container, viewB = image_discription, adapterPosition, item)
             }
             image_title.text = item.title
 
@@ -84,6 +84,6 @@ RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
     interface Interaction {
-        fun onItemSelected(position: Int, item: ImageData)
+        fun onItemSelected(viewA: View, viewB: View, position: Int, item: ImageData)
     }
 }

@@ -14,12 +14,18 @@ import com.chetan_pawar.obvious_assignment.util.ImageUtils.requestOptions
 import com.chetan_pawar.obvious_assignment.util.ProductionImageLoader
 import com.chetan_pawar.obvious_assignment.util.TestImageLoader
 import kotlinx.android.synthetic.main.activity_main.*
+import androidx.core.util.Pair
+
+import android.view.View
+
+import androidx.core.app.ActivityOptionsCompat
+
 
 class MainActivity : AppCompatActivity(), ImagesAdapter.Interaction {
 
     private lateinit var listAdapter: ImagesAdapter
-    lateinit var viewModel : MainViewModel
-    lateinit var imageLoader : ImageLoader
+    lateinit var viewModel: MainViewModel
+    lateinit var imageLoader: ImageLoader
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,7 +49,7 @@ class MainActivity : AppCompatActivity(), ImagesAdapter.Interaction {
 
     private fun initRecyclerView() {
         val spanCount = 2
-        val spacing = 50
+        val spacing = 24
         val includeEdge = true
 
         recycler_view.apply {
@@ -54,10 +60,24 @@ class MainActivity : AppCompatActivity(), ImagesAdapter.Interaction {
         }
     }
 
-    override fun onItemSelected(position: Int, item: ImageData) {
+    override fun onItemSelected(viewA: View,viewB: View, position: Int, item: ImageData) {
         val intent = Intent(this@MainActivity, DetailActivity::class.java).apply {
             putExtra(DetailActivity.INTENT_DETAIL_DATA, item)
         }
-        startActivity(intent)
+
+        val activityOptions: ActivityOptionsCompat =
+            ActivityOptionsCompat.makeSceneTransitionAnimation(
+                this@MainActivity,
+                Pair.create<View, String>(
+                    viewA,
+                    DetailActivity.VIEW_NAME_HEADER_IMAGE
+                ),
+                Pair.create<View, String>(
+                    viewB,
+                    DetailActivity.VIEW_NAME_HEADER_DESC
+                )
+            )
+
+        startActivity(intent, activityOptions.toBundle())
     }
 }
