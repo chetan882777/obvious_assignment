@@ -11,5 +11,5 @@ object ImageUtils {
 
     val requestOptionsWithPlaceholder
         get() =
-            requestOptions.placeholder(R.drawable.loading_animation)
+            requestOptions.placeholder(R.drawable.default_image)
 }

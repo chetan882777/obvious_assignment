@@ -78,12 +78,10 @@ class MainActivityTest {
 
         onView(withId(R.id.image_image)).check(
             matches(
-                CoreMatchers.not(
                     ImageViewHasDrawableMatcher.hasDrawable(
                         context,
                         R.drawable.default_image
                     )
-                )
             )
         )
     }
