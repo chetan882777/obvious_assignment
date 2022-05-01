@@ -12,7 +12,7 @@ import kotlinx.android.parcel.RawValue
 
 @Parcelize
 class ProductionImageLoader(
-    context:@RawValue Context,
+    val context:@RawValue Context,
 
     val requestOptions: @RawValue RequestOptions
 ) : ImageLoader, Parcelable {
